@@ -1,10 +1,14 @@
+from django.db.models import Count
+
 import json
+from django.http.response import HttpResponse
+
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from apps.companias.models import Compania
-from apps.companias.api.serializers import CompaniesSerializer
+from apps.companias.api.serializers import CompaniesSerializer, CompaniesIndustryCount
 
 @api_view(['GET'])
 def populate(request):
@@ -57,3 +61,17 @@ def prom(data, x):
         return (number[0] + number[1])/2
     return 00000
 
+
+
+
+
+
+@api_view(['GET'])
+def industry(request):
+    result = (Compania.objects
+    .values('industry')
+    .annotate(dcount=Count('industry'))
+    .order_by()
+    )
+    serializer = CompaniesIndustryCount(result, many = True)
+    return Response({'CompaniesByIndustry':serializer.data})
