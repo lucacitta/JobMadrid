@@ -14,7 +14,6 @@ def populate(request):
     return Response({'message':f'Created {created} companies in the DataBase', 'Companies': serializer.data})
 
 
-
 def get_from_json(request):
     with open('data.json') as file:
         data = json.load(file)
