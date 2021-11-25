@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from apps.companias.models import Compania
-from apps.companias.api.serializers import CompaniesSerializer, CompaniesIndustryCount
+from apps.companias.api.serializers import CompaniesSerializer, CompaniesIndustryCount, CompaniesCreationCount
 
 @api_view(['GET'])
 def populate(request):
@@ -68,10 +68,19 @@ def prom(data, x):
 
 @api_view(['GET'])
 def industry(request):
-    result = (Compania.objects
+
+    ByIndustry = (Compania.objects
     .values('industry')
-    .annotate(dcount=Count('industry'))
+    .annotate(count=Count('industry'))
     .order_by()
     )
-    serializer = CompaniesIndustryCount(result, many = True)
-    return Response({'CompaniesByIndustry':serializer.data})
+    IndustrySerializer = CompaniesIndustryCount(ByIndustry, many = True)
+
+    byCreation = (Compania.objects
+    .values('founded')
+    .annotate(count=Count('founded'))
+    .order_by()
+    )
+    creationSerializer = CompaniesCreationCount(byCreation, many = True)
+
+    return Response({'CompaniesByIndustry':IndustrySerializer.data, 'CompaniesByCreation':creationSerializer.data})

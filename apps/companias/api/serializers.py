@@ -9,4 +9,8 @@ class CompaniesSerializer(serializers.ModelSerializer):
 
 class CompaniesIndustryCount(serializers.Serializer):
     industry = serializers.CharField(max_length=40)
-    dcount = serializers.IntegerField()
+    count = serializers.IntegerField()
+
+class CompaniesCreationCount(serializers.Serializer):
+    founded = serializers.CharField(max_length=40)
+    count = serializers.IntegerField()
