@@ -28,7 +28,8 @@ THIRD_APPS=[
 ]
 
 MY_APPS = [
-    'companias',
+    'apps.companias',
+    'apps.populate',
 ]
 
 INSTALLED_APPS = BASE_APPS +THIRD_APPS + MY_APPS

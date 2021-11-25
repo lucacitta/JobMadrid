@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CompaniasConfig(AppConfig):
+class PopulateConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'companias'
+    name = 'apps.populate'
