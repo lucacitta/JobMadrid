@@ -1,6 +1,11 @@
 from django.db import models
 
-
+'''
+Modelo:
+    El modelo fue creado con las especificaciones del json, la unica difencia es que se le agrego un campo sizeProm
+        usado para ordenar las empresas por tamaño cuando los rangos no sean iguales.
+        (Este campo no esta en los endpoints)
+'''
 
 class Company(models.Model):
     id = models.CharField(primary_key=True, max_length=80)

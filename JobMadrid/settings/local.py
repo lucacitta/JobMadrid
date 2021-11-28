@@ -1,7 +1,12 @@
 from .base import *
-from .password import PASSWORD_PASSWORD
+from .password import PASSWORD_PASSWORD, DB_NAME
 
-# SECURITY WARNING: don't run with debug turned on in production!
+'''
+Por seguridad, recordar que hay que crear un archivo "password.py" y ahi dentro declarar la PASSWORD_PASSWORD
+con el valor de la secret key de la DB, lo mismo con el nombre de la DB.
+'''
+
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -9,7 +14,7 @@ ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'JobMadrid',
+        'NAME': DB_NAME,
         'USER': 'postgres',
         'PASSWORD': PASSWORD_PASSWORD,
         'HOST': '127.0.0.1',

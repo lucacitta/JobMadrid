@@ -9,6 +9,10 @@ from apps.companies.models import Company
 from .serializers import CompaniesSerializer
 from .serializers import CompaniesIndustryCount, CompaniesCreationCount, CompaniesSizeCount
 
+'''
+    EndPoints tamaño y creacion:
+        Se uso generics que resuelve muy simple el problema solo es necesario usar el serializador de las compañias.
+'''
 
 class CompaniesBySize(generics.ListAPIView):
 
@@ -21,6 +25,11 @@ class CompaniesByCreationDate(generics.ListAPIView):
     queryset = Company.objects.order_by('-founded')
     serializer_class = CompaniesSerializer
 
+
+'''
+End point metricas:
+    Para este punto cree 3 serializadores con distintos campos, uno para cada tipo de dato.
+'''
 
 @api_view(['GET'])
 def industry(request):

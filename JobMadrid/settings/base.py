@@ -1,18 +1,19 @@
-
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+'''
+Por seguridad, recordar que hay que crear un archivo "password.py" y ahi dentro declarar la PASSWORD_SECRET_KEY
+con el valor de la secret key del proyecto. Lo mismo sucede con la base de datos
 
-# SECURITY WARNING: keep the secret key used in production secret!
+'''
+
 from .password import PASSWORD_SECRET_KEY
 SECRET_KEY = PASSWORD_SECRET_KEY
 
-# Application definition
+# Apps
 
 BASE_APPS = [
     'django.contrib.admin',
@@ -66,10 +67,6 @@ WSGI_APPLICATION = 'JobMadrid.wsgi.application'
 
 
 
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -86,8 +83,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
+
 
 LANGUAGE_CODE = 'en-us'
 
@@ -100,13 +96,11 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
+
 
 STATIC_URL = '/static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
