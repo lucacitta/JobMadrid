@@ -1,11 +1,11 @@
-from rest_framework import fields, serializers
+from rest_framework import serializers
 
-from apps.companias.models import Compania
+from apps.companies.models import Company
 
 class CompaniesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Compania
-        fields = '__all__'
+        model = Company
+        exclude = ('sizeProm',)
 
 class CompaniesIndustryCount(serializers.Serializer):
     industry = serializers.CharField(max_length=40)
@@ -13,4 +13,8 @@ class CompaniesIndustryCount(serializers.Serializer):
 
 class CompaniesCreationCount(serializers.Serializer):
     founded = serializers.CharField(max_length=40)
+    count = serializers.IntegerField()
+
+class CompaniesSizeCount(serializers.Serializer):
+    size = serializers.CharField(max_length=20)
     count = serializers.IntegerField()

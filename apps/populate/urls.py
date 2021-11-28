@@ -3,5 +3,4 @@ from .api import views
 
 urlpatterns = [
     path('',views.populate, name='populate'),
-    path('industry',views.industry, name = 'industry')
 ]

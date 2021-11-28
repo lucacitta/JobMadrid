@@ -2,7 +2,7 @@ from django.db import models
 
 
 
-class Compania(models.Model):
+class Company(models.Model):
     id = models.CharField(primary_key=True, max_length=80)
     website = models.CharField(max_length=80, null=True, blank=True)
     name = models.CharField(max_length=80, null=True, blank=True)

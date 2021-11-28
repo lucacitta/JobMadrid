@@ -28,7 +28,7 @@ THIRD_APPS=[
 ]
 
 MY_APPS = [
-    'apps.companias',
+    'apps.companies',
     'apps.populate',
 ]
 

@@ -1,4 +1,3 @@
-from django.db.models import Count
 
 import json
 from django.http.response import HttpResponse
@@ -7,13 +6,14 @@ from django.http.response import HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from apps.companias.models import Compania
-from apps.companias.api.serializers import CompaniesSerializer, CompaniesIndustryCount, CompaniesCreationCount
+from apps.companies.models import Company
+from apps.companies.api.serializers import CompaniesSerializer
+
 
 @api_view(['GET'])
 def populate(request):
     created = get_from_json(request)
-    companies = Compania.objects.all()
+    companies = Company.objects.all()
     serializer = CompaniesSerializer(companies, many = True)
     return Response({'message':f'Created {created} companies in the DataBase', 'Companies': serializer.data})
 
@@ -34,8 +34,8 @@ def get_from_json(request):
             industry = check(data, x, 'industry', 'text')
             linkedin_url = check(data, x, 'linkedin_url', 'text')
             sizeProm = prom(data, x)
-            compania = Compania(id, website, name, founded, size, sizeProm, locality, region, country, industry, linkedin_url)
-            compania.save()
+            company = Company(id, website, name, founded, size, sizeProm, locality, region, country, industry, linkedin_url)
+            company.save()
             x += 1
         return x
 
@@ -61,26 +61,3 @@ def prom(data, x):
         return (number[0] + number[1])/2
     return 00000
 
-
-
-
-
-
-@api_view(['GET'])
-def industry(request):
-
-    ByIndustry = (Compania.objects
-    .values('industry')
-    .annotate(count=Count('industry'))
-    .order_by()
-    )
-    IndustrySerializer = CompaniesIndustryCount(ByIndustry, many = True)
-
-    byCreation = (Compania.objects
-    .values('founded')
-    .annotate(count=Count('founded'))
-    .order_by()
-    )
-    creationSerializer = CompaniesCreationCount(byCreation, many = True)
-
-    return Response({'CompaniesByIndustry':IndustrySerializer.data, 'CompaniesByCreation':creationSerializer.data})
